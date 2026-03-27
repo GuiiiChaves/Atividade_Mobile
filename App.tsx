@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, SafeAreaView, Platform, StatusBar as RNStatusBar } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView, Platform, StatusBar as RNStatusBar } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import Task from './src/components/Task';
+import TaskList from './src/components/TaskList';
 import { addTask, deleteTask, getAllTasks, updateTask, TaskItem } from './src/utils/handle-api';
-
+import { Image } from 'expo-image';
 export default function App() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [text, setText] = useState("");
@@ -23,6 +23,10 @@ export default function App() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
+        <Image
+          source="https://github.com/renanalencar/tasks-app-expo/blob/main/tasks/images/image.png?raw=true"
+          style={{ width: '100%', height: 100 }}
+        />
         <Text style={styles.header}>Tarefas</Text>
 
         <View style={styles.top}>
@@ -47,16 +51,11 @@ export default function App() {
           </TouchableOpacity>
         </View>
 
-        <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
-          {tasks.map((item) => (
-            <Task
-              key={item._id}
-              text={item.text}
-              updateMode={() => updateMode(item._id, item.text)}
-              deleteToDo={() => deleteTask(item._id, setTasks)}
-            />
-          ))}
-        </ScrollView>
+        <TaskList
+          tasks={tasks}
+          onEdit={updateMode}
+          onDelete={(id) => deleteTask(id, setTasks)}
+        />
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>
@@ -110,11 +109,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
-  list: {
-    marginTop: 16,
-    flex: 1,
-  },
-  listContent: {
-    paddingBottom: 24,
-  }
 });
