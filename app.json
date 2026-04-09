@@ -10,11 +10,11 @@
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
-        },
-        "ios": {
+    },
+    "ios": {
       "supportsTablet": true
-        },
-        "android": {
+    },
+    "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -22,10 +22,12 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false
-        },
-        "web": {
+    },
+    "web": {
       "favicon": "./assets/favicon.png"
-        },
-        "plugins": []
-      }
-    }
+    },
+    "plugins": [
+      "@react-native-community/datetimepicker"
+    ]
+  }
+}

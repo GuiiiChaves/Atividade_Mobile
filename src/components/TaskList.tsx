@@ -5,7 +5,7 @@ import { TaskItem as TaskItemType } from '../utils/handle-api';
 
 interface TaskListProps {
   tasks: TaskItemType[];
-  onEdit: (id: string, text: string) => void;
+  onEdit: (id: string, text: string, completed: boolean, dueDate?: string) => void;
   onDelete: (id: string) => void;
 }
 
@@ -19,7 +19,9 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit, onDelete }) => {
       renderItem={({ item }) => (
         <TaskItem
           text={item.text}
-          onEdit={() => onEdit(item._id, item.text)}
+          completed={item.completed}
+          dueDate={item.dueDate}
+          onEdit={() => onEdit(item._id, item.text, item.completed, item.dueDate)}
           onDelete={() => onDelete(item._id)}
         />
       )}
